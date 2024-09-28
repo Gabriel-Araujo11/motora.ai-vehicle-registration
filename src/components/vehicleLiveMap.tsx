@@ -1,6 +1,6 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import VehicleForm from "./vehicleForm";
 import { Vehicle } from "@/types/types";
 import { BASE_URL } from "@/utils/localhost";
@@ -21,11 +21,13 @@ export default function VehicleMap() {
       if (response.ok) {
         const newVehicle = await response.json();
         setVehicles((prevVehicles) => [...prevVehicles, newVehicle]);
+        return true;
       } else {
-        console.error("Erro ao cadastrar veículo:", response.statusText);
+        throw new Error("Erro ao cadastrar veículo: " + response.statusText);
       }
     } catch (error) {
       console.error("Erro na requisição:", error);
+      throw error;
     }
   };
 
