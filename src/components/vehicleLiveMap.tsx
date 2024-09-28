@@ -2,10 +2,11 @@ import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import VehicleForm from "./vehicleForm";
+import VehicleList from "./vehicleList";
 import { Vehicle } from "@/types/types";
 import { BASE_URL } from "@/utils/localhost";
 import io from "socket.io-client";
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 
 export default function VehicleMap() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -66,22 +67,9 @@ export default function VehicleMap() {
   return (
     <Flex direction={{ base: "column", md: "row" }} gap={8} p={2}>
       <Box flex="1" maxW={{ base: "100%", md: "40%" }}>
-        <Text>Listar</Text>
-        <VehicleForm onAddVehicle={handleAddVehicle} />
+        <VehicleList />
         <Text>Cadastrar</Text>
         <VehicleForm onAddVehicle={handleAddVehicle} />
-        <Text>Atualizar</Text>
-        <VehicleForm onAddVehicle={handleAddVehicle} />
-        <Text>Deletar</Text>
-        <Button
-          type="submit"
-          colorScheme="teal"
-          width="full"
-          backgroundColor="#0c0847"
-          _hover="black"
-        >
-          Deletar Veículo
-        </Button>
       </Box>
 
       <Box flex="2" maxW={{ base: "100%", md: "60%" }}>
