@@ -2,6 +2,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import { Vehicle } from "@/types/types";
+import { BASE_URL } from "@/utils/localhost";
 
 export default function VehicleMap() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -9,7 +10,7 @@ export default function VehicleMap() {
   useEffect(() => {
     const fetchVehicles = async () => {
       try {
-        const response = await fetch("http://localhost:3001/vehicles");
+        const response = await fetch(`http://${BASE_URL}/vehicles`);
         const data = await response.json();
         setVehicles(data);
       } catch (error) {

@@ -6,7 +6,7 @@ import VehicleMap from "../components/vehicleLiveMap";
 export default function Home() {
   return (
     <div>
-      <Heading p={10}>Map</Heading>
+      <Heading p={10}>Motora.ai monitoring</Heading>
       <Box p={10}>
         <VehicleMap />
       </Box>

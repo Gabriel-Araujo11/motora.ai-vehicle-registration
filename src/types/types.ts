@@ -8,4 +8,8 @@ export interface Vehicle {
   status: string;
 }
 
+export interface VehicleFormProps {
+  onAddVehicle: (vehicle: Vehicle) => void;
+}
+
 export type CreateVehiclePayload = Omit<Vehicle, "id">;
