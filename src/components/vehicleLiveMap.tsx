@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import VehicleForm from "./vehicleForm";
 import { Vehicle } from "@/types/types";
 import { BASE_URL } from "@/utils/localhost";
+import io from "socket.io-client";
 
 export default function VehicleMap() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -43,6 +44,22 @@ export default function VehicleMap() {
     };
 
     fetchVehicles();
+  }, []);
+
+  useEffect(() => {
+    const socket = io(`${BASE_URL}/vehicles/ws`);
+
+    socket.on("vehicle_update", (updatedVehicle: Vehicle) => {
+      setVehicles((prevVehicles) =>
+        prevVehicles.map((vehicle) =>
+          vehicle.id === updatedVehicle.id ? updatedVehicle : vehicle
+        )
+      );
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   return (
