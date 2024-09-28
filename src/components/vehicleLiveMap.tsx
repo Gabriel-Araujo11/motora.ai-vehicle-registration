@@ -5,6 +5,7 @@ import VehicleForm from "./vehicleForm";
 import { Vehicle } from "@/types/types";
 import { BASE_URL } from "@/utils/localhost";
 import io from "socket.io-client";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 
 export default function VehicleMap() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -63,23 +64,43 @@ export default function VehicleMap() {
   }, []);
 
   return (
-    <div>
-      <VehicleForm onAddVehicle={handleAddVehicle} />
-      <MapContainer
-        center={[51.505, -0.09]}
-        zoom={13}
-        style={{ height: "80vh", width: "100vw" }}
-      >
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        {vehicles.map((vehicle) => (
-          <Marker key={vehicle.id} position={[vehicle.lat, vehicle.lng]}>
-            <Popup>
-              {vehicle.type} - {vehicle.placa} <br /> Velocidade:{" "}
-              {vehicle.speed} km/h
-            </Popup>
-          </Marker>
-        ))}
-      </MapContainer>
-    </div>
+    <Flex direction={{ base: "column", md: "row" }} gap={8} p={2}>
+      <Box flex="1" maxW={{ base: "100%", md: "40%" }}>
+        <Text>Listar</Text>
+        <VehicleForm onAddVehicle={handleAddVehicle} />
+        <Text>Cadastrar</Text>
+        <VehicleForm onAddVehicle={handleAddVehicle} />
+        <Text>Atualizar</Text>
+        <VehicleForm onAddVehicle={handleAddVehicle} />
+        <Text>Deletar</Text>
+        <Button
+          type="submit"
+          colorScheme="teal"
+          width="full"
+          backgroundColor="#0c0847"
+          _hover="black"
+        >
+          Deletar Veículo
+        </Button>
+      </Box>
+
+      <Box flex="2" maxW={{ base: "100%", md: "60%" }}>
+        <MapContainer
+          center={[51.505, -0.09]}
+          zoom={13}
+          style={{ width: "100%", height: "80vh" }}
+        >
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          {vehicles.map((vehicle) => (
+            <Marker key={vehicle.id} position={[vehicle.lat, vehicle.lng]}>
+              <Popup>
+                {vehicle.type} - {vehicle.placa} <br /> Velocidade:{" "}
+                {vehicle.speed} km/h
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
+      </Box>
+    </Flex>
   );
 }
