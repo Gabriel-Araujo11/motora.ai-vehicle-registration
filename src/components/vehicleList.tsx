@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { Vehicle } from "@/types/types";
 import { BASE_URL } from "@/utils/localhost";
-import VehicleModalUpdates from "./vehicleModalUpdates";
+import VehicleModalUpdates from "./modal/vehicleModal";
 
 //TODO: Colocar os toasts em arquivo separado
 
@@ -77,7 +77,7 @@ export default function VehicleSelect() {
     }
   };
 
-  const handleDeleteVehicle = async (vehicleId: string) => {
+  const handleDeleteVehicle = async (vehicleId: number) => {
     try {
       const response = await fetch(`${BASE_URL}/vehicles/${vehicleId}`, {
         method: "DELETE",
@@ -141,13 +141,15 @@ export default function VehicleSelect() {
           ))}
         </Select>
       </FormControl>
-      <VehicleModalUpdates
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        vehicle={selectedVehicle}
-        onSave={handleSaveVehicle}
-        onDelete={() => handleDeleteVehicle(selectedVehicle?.id)}
-      />
+      {selectedVehicle && (
+        <VehicleModalUpdates
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          vehicle={selectedVehicle}
+          onSave={handleSaveVehicle}
+          onDelete={() => handleDeleteVehicle(selectedVehicle.id)}
+        />
+      )}
     </Box>
   );
 }
