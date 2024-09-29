@@ -50,7 +50,7 @@ export default function DeleteConfirmationModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent p={{ base: 2, md: 4 }} mb={{ base: 2, md: 4 }}>
         <ModalHeader>Deseja remover este veículo? </ModalHeader>
         <ModalCloseButton />
         <ModalBody>

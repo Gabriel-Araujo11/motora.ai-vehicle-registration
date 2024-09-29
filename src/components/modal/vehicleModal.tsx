@@ -72,10 +72,14 @@ export default function VehicleModalUpdates({
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent
+          m={{ base: 2, md: 4 }}
+          mb={{ base: 2, md: 4 }}
+          backgroundColor="#fcf8f5"
+        >
           <ModalHeader color="#0c0847">Editar Veículo</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody m={{ base: 1, md: 4 }}>
             {updatedVehicle && (
               <>
                 <FormControl id="type" mb={4}>
