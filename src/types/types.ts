@@ -13,3 +13,10 @@ export interface VehicleFormProps {
 }
 
 export type CreateVehiclePayload = Omit<Vehicle, "id">;
+
+export interface VehicleEditModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  vehicle: Vehicle | null;
+  onSave: (updatedVehicle: Vehicle) => void;
+}

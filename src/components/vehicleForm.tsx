@@ -9,8 +9,6 @@ export default function VehicleForm({ onAddVehicle }: VehicleFormProps) {
   const { lat, lng } = generateRandomCoordinates();
   const toast = useToast();
 
-  //TODO: implementar mask no input de placas XXX-YYYY
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newVehicle = {
@@ -75,7 +73,7 @@ export default function VehicleForm({ onAddVehicle }: VehicleFormProps) {
 
         <Button
           type="submit"
-          colorScheme="teal"
+          colorScheme="blue"
           width="full"
           backgroundColor="#0c0847"
           _hover="black"

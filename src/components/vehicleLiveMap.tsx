@@ -68,7 +68,7 @@ export default function VehicleMap() {
     <Flex direction={{ base: "column", md: "row" }} gap={8} p={2}>
       <Box flex="1" maxW={{ base: "100%", md: "40%" }}>
         <VehicleList />
-        <Text>Cadastrar</Text>
+        <Text color="#0c0847">Cadastrar</Text>
         <VehicleForm onAddVehicle={handleAddVehicle} />
       </Box>
 
