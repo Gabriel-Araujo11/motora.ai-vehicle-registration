@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Box, Button, Input, Select, VStack, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  FormLabel,
+  Input,
+  Select,
+  VStack,
+  useToast,
+} from "@chakra-ui/react";
 import { VehicleFormProps } from "@/types/types";
 import { generateRandomCoordinates } from "@/hooks/useRandomCoordinates";
 
@@ -53,7 +61,8 @@ export default function VehicleForm({ onAddVehicle }: VehicleFormProps) {
       borderWidth="1px"
       borderRadius="md"
     >
-      <VStack spacing={4}>
+      <FormLabel color="#0c0847">Cadastre um veículo:</FormLabel>
+      <VStack>
         <Select
           value={type}
           onChange={(e) => setType(e.target.value)}
@@ -68,6 +77,7 @@ export default function VehicleForm({ onAddVehicle }: VehicleFormProps) {
           placeholder="Placa"
           value={placa}
           onChange={(e) => setPlaca(e.target.value)}
+          color="#0c0847"
           required
         />
 

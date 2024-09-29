@@ -20,25 +20,9 @@ export default function VehicleModalUpdates({
   onClose,
   vehicle,
   onSave,
+  onDelete,
 }: VehicleEditModalProps) {
   const [updatedVehicle, setUpdatedVehicle] = useState<Vehicle | null>(vehicle);
-
-  useEffect(() => {
-    setUpdatedVehicle(vehicle);
-  }, [vehicle]);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (updatedVehicle) {
-      const { name, value } = e.target;
-      setUpdatedVehicle({
-        ...updatedVehicle,
-        [name]:
-          name === "speed" || name === "lat" || name === "lng"
-            ? Number(value)
-            : value,
-      });
-    }
-  };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (updatedVehicle) {
@@ -55,6 +39,23 @@ export default function VehicleModalUpdates({
       onSave(updatedVehicle);
     }
   };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (updatedVehicle) {
+      const { name, value } = e.target;
+      setUpdatedVehicle({
+        ...updatedVehicle,
+        [name]:
+          name === "speed" || name === "lat" || name === "lng"
+            ? Number(value)
+            : value,
+      });
+    }
+  };
+
+  useEffect(() => {
+    setUpdatedVehicle(vehicle);
+  }, [vehicle]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -142,8 +143,22 @@ export default function VehicleModalUpdates({
           >
             Salvar
           </Button>
-          <Button variant="ghost" onClick={onClose} color="#0c0847">
+          <Button
+            colorScheme="blue"
+            onClick={onClose}
+            backgroundColor="#0c0847"
+            color="white"
+            mr={3}
+          >
             Cancelar
+          </Button>
+          <Button
+            _hover="black"
+            onClick={onDelete}
+            color="white"
+            backgroundColor="red"
+          >
+            Deletar
           </Button>
         </ModalFooter>
       </ModalContent>

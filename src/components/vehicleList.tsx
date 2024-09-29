@@ -18,20 +18,6 @@ export default function VehicleSelect() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
 
-  useEffect(() => {
-    const fetchVehicles = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/vehicles`);
-        const data = await response.json();
-        setVehicles(data);
-      } catch (error) {
-        console.error("Erro ao buscar os veículos:", error);
-      }
-    };
-
-    fetchVehicles();
-  }, []);
-
   const handleSelectChange = (placa: string) => {
     const vehicle = vehicles.find((v) => v.placa === placa);
     if (vehicle) {
@@ -91,6 +77,54 @@ export default function VehicleSelect() {
     }
   };
 
+  const handleDeleteVehicle = async (vehicleId: string) => {
+    try {
+      const response = await fetch(`${BASE_URL}/vehicles/${vehicleId}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        const updatedList = vehicles.filter((v) => v.id !== Number(vehicleId));
+        setVehicles(updatedList);
+        setIsModalOpen(false);
+        toast({
+          title: "Veículo deletado com sucesso!",
+          description: "O veículo foi removido da lista e do mapa.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        });
+      } else {
+        throw new Error("Erro ao deletar veículo");
+      }
+    } catch (error) {
+      console.error("Erro ao deletar o veículo:", error);
+      toast({
+        title: "Erro ao deletar o veículo",
+        description: "Ocorreu um erro ao tentar deletar o veículo.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+  };
+
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/vehicles`);
+        const data = await response.json();
+        setVehicles(data);
+      } catch (error) {
+        console.error("Erro ao buscar os veículos:", error);
+      }
+    };
+
+    fetchVehicles();
+  }, []);
+
   return (
     <Box as="form" p={4} borderWidth="1px" borderRadius="md">
       <FormControl id="vehicle-select">
@@ -112,6 +146,7 @@ export default function VehicleSelect() {
         onClose={() => setIsModalOpen(false)}
         vehicle={selectedVehicle}
         onSave={handleSaveVehicle}
+        onDelete={() => handleDeleteVehicle(selectedVehicle?.id)}
       />
     </Box>
   );

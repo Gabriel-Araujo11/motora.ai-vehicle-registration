@@ -6,7 +6,7 @@ import VehicleList from "./vehicleList";
 import { Vehicle } from "@/types/types";
 import { BASE_URL } from "@/utils/localhost";
 import io from "socket.io-client";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 
 export default function VehicleMap() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -68,7 +68,6 @@ export default function VehicleMap() {
     <Flex direction={{ base: "column", md: "row" }} gap={8} p={2}>
       <Box flex="1" maxW={{ base: "100%", md: "40%" }}>
         <VehicleList />
-        <Text color="#0c0847">Cadastrar</Text>
         <VehicleForm onAddVehicle={handleAddVehicle} />
       </Box>
 

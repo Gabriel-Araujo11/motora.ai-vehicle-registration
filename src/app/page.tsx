@@ -9,7 +9,6 @@ export default function Home() {
       <Heading p={10} color="#0c0847" textAlign="center">
         Motora.ai monitoring
       </Heading>
-
       <Flex
         direction={{ base: "column", md: "row" }}
         align="center"
