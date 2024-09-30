@@ -1,5 +1,7 @@
 "use client";
 
+//DONE ✅: ThankYou, motora.ai!
+
 import { Heading } from "@chakra-ui/react";
 import Dashboard from "@/components/dashboard";
 
