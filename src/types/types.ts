@@ -19,5 +19,14 @@ export interface VehicleEditModalProps {
   onClose: () => void;
   vehicle: Vehicle | null;
   onSave: (updatedVehicle: Vehicle) => void;
-  onDelete: (vehicleId: Vehicle) => void;
+  onDelete: (vehicleId?: Vehicle) => void;
+}
+
+export interface VehicleMapProps {
+  vehicles: Vehicle[];
+}
+
+export interface DashboardProps {
+  vehicles: Vehicle[];
+  handleAddVehicle: () => void;
 }
