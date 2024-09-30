@@ -2,11 +2,11 @@ import { useState } from "react";
 import {
   Box,
   Button,
+  FormControl,
   FormLabel,
   Input,
   Select,
   VStack,
-  useToast,
 } from "@chakra-ui/react";
 import { VehicleRegisterProps } from "@/types/types";
 import { generateRandomCoordinates } from "@/hooks/useRandomCoordinates";
@@ -17,19 +17,10 @@ export default function VehicleRegister({
   const [type, setType] = useState("car");
   const [placa, setPlaca] = useState("");
   const { lat, lng } = generateRandomCoordinates();
-  const toast = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!placa.trim()) {
-      toast({
-        title: "Erro",
-        description: "A placa é obrigatória.",
-        status: "warning",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
       return;
     }
 
@@ -52,36 +43,38 @@ export default function VehicleRegister({
 
   return (
     <Box as="form" onSubmit={handleSubmit} p={4} borderRadius="md">
-      <FormLabel color="#0c0847">Cadastre um veículo:</FormLabel>
-      <VStack spacing={4}>
-        <Select
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-          color="#0c0847"
-        >
-          <option value="car">Carro</option>
-          <option value="bus">Ônibus</option>
-          <option value="truck">Caminhão</option>
-        </Select>
+      <FormControl id="vehicle-register">
+        <FormLabel color="#0c0847">Cadastre um veículo:</FormLabel>
+        <VStack spacing={4}>
+          <Select
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            color="#0c0847"
+          >
+            <option value="car">Carro</option>
+            <option value="bus">Ônibus</option>
+            <option value="truck">Caminhão</option>
+          </Select>
 
-        <Input
-          placeholder="Placa"
-          value={placa}
-          onChange={(e) => setPlaca(e.target.value)}
-          color="#0c0847"
-          required
-        />
+          <Input
+            placeholder="Placa"
+            value={placa}
+            onChange={(e) => setPlaca(e.target.value)}
+            color="#0c0847"
+            required
+          />
 
-        <Button
-          type="submit"
-          colorScheme="blue"
-          width="full"
-          backgroundColor="#0c0847"
-          _hover={{ backgroundColor: "black" }}
-        >
-          Adicionar Veículo
-        </Button>
-      </VStack>
+          <Button
+            type="submit"
+            colorScheme="blue"
+            width="full"
+            backgroundColor="#0c0847"
+            _hover={{ backgroundColor: "black" }}
+          >
+            Adicionar Veículo
+          </Button>
+        </VStack>
+      </FormControl>
     </Box>
   );
 }

@@ -1,10 +1,11 @@
-import { Box, Flex, Link, Text, useToast } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import VehicleList from "./vehicleList";
-import VehicleRegister from "./vehicleRegister";
+import { Box, Flex, Link, Text, useToast } from "@chakra-ui/react";
 import VehicleMap from "./vehicleMap";
+import VehicleList from "./vehicleList";
 import { Vehicle } from "@/types/types";
 import { BASE_URL } from "@/utils/localhost";
+import VehicleRegister from "./vehicleRegister";
+import { toast_register, toast_register_error } from "@/utils/toast";
 
 export default function Dashboard() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -23,27 +24,13 @@ export default function Dashboard() {
       if (response.ok) {
         const newVehicle = await response.json();
         setVehicles((prevVehicles) => [...prevVehicles, newVehicle]);
-        toast({
-          title: "Veículo cadastrado com sucesso!",
-          description: "O veículo foi adicionado e está disponível no mapa.",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-          position: "top",
-        });
+        toast(toast_register);
       } else {
         console.error("Erro ao cadastrar veículo:", response.statusText);
       }
     } catch (error) {
       console.error("Erro na requisição:", error);
-      toast({
-        title: "Erro ao cadastrar veículo",
-        description: "Ocorreu um erro ao tentar cadastrar o veículo.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
+      toast(toast_register_error);
     }
   };
 

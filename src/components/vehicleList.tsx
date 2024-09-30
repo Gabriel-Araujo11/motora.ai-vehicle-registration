@@ -6,11 +6,16 @@ import {
   Box,
   useToast,
 } from "@chakra-ui/react";
+import {
+  toast_delete,
+  toast_delete_error,
+  toast_list_error,
+  toast_update,
+  toast_update_error,
+} from "@/utils/toast";
 import { Vehicle, VehicleListProps } from "@/types/types";
-import { BASE_URL } from "@/utils/localhost";
 import VehicleModalUpdates from "./modal/vehicleModal";
-
-//TODO: Colocar os toasts em arquivo separado
+import { BASE_URL } from "@/utils/localhost";
 
 export default function VehicleSelect({
   vehicles,
@@ -47,35 +52,14 @@ export default function VehicleSelect({
         );
         setVehicles(updatedList);
         setIsModalOpen(false);
-        toast({
-          title: "Veículo atualizado com sucesso!",
-          description: "O veículo foi atualizado e está disponível no mapa.",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-          position: "top",
-        });
+        toast(toast_update);
       } else {
-        toast({
-          title: "Erro ao atualizar o veículo",
-          description: "Ocorreu um erro ao tentar atualizar o veículo.",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-          position: "top",
-        });
+        toast(toast_update_error);
         throw new Error("Erro ao atualizar veículo");
       }
     } catch (error) {
       console.error("Erro ao atualizar o veículo:", error);
-      toast({
-        title: "Erro ao atualizar o veículo",
-        description: "Ocorreu um erro ao tentar atualizar o veículo.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
+      toast(toast_update_error);
     }
   };
 
@@ -89,27 +73,13 @@ export default function VehicleSelect({
         const updatedList = vehicles.filter((v) => v.id !== Number(vehicleId));
         setVehicles(updatedList);
         setIsModalOpen(false);
-        toast({
-          title: "Veículo deletado com sucesso!",
-          description: "O veículo foi removido da lista e do mapa.",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-          position: "top",
-        });
+        toast(toast_delete);
       } else {
         throw new Error("Erro ao deletar veículo");
       }
     } catch (error) {
       console.error("Erro ao deletar o veículo:", error);
-      toast({
-        title: "Erro ao deletar o veículo",
-        description: "Ocorreu um erro ao tentar deletar o veículo.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
+      toast(toast_delete_error);
     }
   };
 
@@ -121,11 +91,12 @@ export default function VehicleSelect({
         setVehicles(data);
       } catch (error) {
         console.error("Erro ao buscar os veículos:", error);
+        toast(toast_list_error);
       }
     };
 
     fetchVehicles();
-  }, [setVehicles]);
+  }, [setVehicles, toast]);
 
   return (
     <Box as="form" p={4} borderRadius="md">

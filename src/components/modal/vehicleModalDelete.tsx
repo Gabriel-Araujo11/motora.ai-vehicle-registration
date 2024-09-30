@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -11,7 +12,7 @@ import {
   FormControl,
   useToast,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { toast_confirmation_error } from "@/utils/toast";
 
 interface DeleteConfirmationModalProps {
   isOpen: boolean;
@@ -36,14 +37,7 @@ export default function DeleteConfirmationModal({
       onConfirmDelete();
       onClose();
     } else {
-      toast({
-        title: "Texto de confirmação incorreto",
-        description: 'Digite "DELETAR VEÍCULO" para confirmar.',
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
+      toast(toast_confirmation_error);
     }
   };
 
