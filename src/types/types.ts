@@ -30,3 +30,8 @@ export interface DashboardProps {
   vehicles: Vehicle[];
   handleAddVehicle: () => void;
 }
+
+export interface VehicleListProps {
+  vehicles: Vehicle[];
+  setVehicles: (vehicles: Vehicle[]) => void;
+}

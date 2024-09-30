@@ -6,16 +6,18 @@ import {
   Box,
   useToast,
 } from "@chakra-ui/react";
-import { Vehicle } from "@/types/types";
+import { Vehicle, VehicleListProps } from "@/types/types";
 import { BASE_URL } from "@/utils/localhost";
 import VehicleModalUpdates from "./modal/vehicleModal";
 
 //TODO: Colocar os toasts em arquivo separado
 
-export default function VehicleSelect() {
+export default function VehicleSelect({
+  vehicles,
+  setVehicles,
+}: VehicleListProps) {
   const toast = useToast();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
 
   const handleSelectChange = (placa: string) => {
@@ -123,7 +125,7 @@ export default function VehicleSelect() {
     };
 
     fetchVehicles();
-  }, []);
+  }, [setVehicles]);
 
   return (
     <Box as="form" p={4} borderWidth="1px" borderRadius="md">

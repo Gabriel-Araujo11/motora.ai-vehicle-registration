@@ -1,5 +1,5 @@
 import { Box, Flex, Text, useToast } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import VehicleList from "./vehicleList";
 import VehicleRegister from "./vehicleRegister";
 import VehicleMap from "./vehicleMap";
@@ -47,6 +47,20 @@ export default function Dashboard() {
     }
   };
 
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/vehicles`);
+        const data = await response.json();
+        setVehicles(data);
+      } catch (error) {
+        console.error("Erro ao buscar os veículos:", error);
+      }
+    };
+
+    fetchVehicles();
+  }, []);
+
   return (
     <Flex bg="gray.800" justifyContent="center" alignItems="center">
       <Flex
@@ -71,7 +85,7 @@ export default function Dashboard() {
             mb={4}
             h="40vh"
           >
-            <VehicleList vehicles={vehicles} />
+            <VehicleList vehicles={vehicles} setVehicles={setVehicles} />
           </Box>
           <Box
             border="2px solid"
