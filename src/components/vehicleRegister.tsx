@@ -55,7 +55,6 @@ export default function VehicleRegister({
             <option value="bus">Ônibus</option>
             <option value="truck">Caminhão</option>
           </Select>
-
           <Input
             placeholder="Placa"
             value={placa}
@@ -63,13 +62,11 @@ export default function VehicleRegister({
             color="#0c0847"
             required
           />
-
           <Button
             type="submit"
             colorScheme="blue"
             width="full"
             backgroundColor="#0c0847"
-            _hover={{ backgroundColor: "black" }}
           >
             Adicionar Veículo
           </Button>

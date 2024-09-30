@@ -55,7 +55,6 @@ export default function VehicleSelect({
         toast(toast_update);
       } else {
         toast(toast_update_error);
-        throw new Error("Erro ao atualizar veículo");
       }
     } catch (error) {
       console.error("Erro ao atualizar o veículo:", error);
@@ -75,7 +74,7 @@ export default function VehicleSelect({
         setIsModalOpen(false);
         toast(toast_delete);
       } else {
-        throw new Error("Erro ao deletar veículo");
+        toast(toast_delete_error);
       }
     } catch (error) {
       console.error("Erro ao deletar o veículo:", error);

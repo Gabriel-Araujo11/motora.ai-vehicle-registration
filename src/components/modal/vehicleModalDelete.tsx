@@ -13,12 +13,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { toast_confirmation_error } from "@/utils/toast";
-
-interface DeleteConfirmationModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onConfirmDelete: () => void;
-}
+import { DeleteConfirmationModalProps } from "@/types/types";
 
 export default function DeleteConfirmationModal({
   isOpen,
@@ -44,14 +39,15 @@ export default function DeleteConfirmationModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent p={{ base: 2, md: 4 }} mb={{ base: 2, md: 4 }}>
-        <ModalHeader>Deseja remover este veículo? </ModalHeader>
+      <ModalContent p={{ base: 2, md: 4 }} mb={{ base: 2, md: 4 }} bg="gray.50">
+        <ModalHeader color="#0c0847">Deseja remover este veículo? </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <FormControl>
             <Input
               placeholder='Digite "DELETAR VEÍCULO" para confirmar'
               value={confirmationText}
+              color="#0c0847"
               onChange={handleInputChange}
             />
           </FormControl>

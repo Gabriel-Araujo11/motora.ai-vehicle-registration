@@ -35,3 +35,9 @@ export interface VehicleListProps {
   vehicles: Vehicle[];
   setVehicles: (vehicles: Vehicle[]) => void;
 }
+
+export interface DeleteConfirmationModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirmDelete: () => void;
+}

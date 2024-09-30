@@ -44,7 +44,6 @@ export default function Dashboard() {
         console.error("Erro ao buscar os veículos:", error);
       }
     };
-
     fetchVehicles();
   }, []);
 
@@ -55,7 +54,7 @@ export default function Dashboard() {
         borderRadius="20px"
         w={{ base: "100%", md: "70%" }}
         p={5}
-        bg="white"
+        bg="gray.50"
         backgroundColor="gray.800"
       >
         <Flex

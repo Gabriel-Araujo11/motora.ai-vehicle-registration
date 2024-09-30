@@ -1,4 +1,4 @@
-import { Vehicle, VehicleEditModalProps } from "@/types/types";
+import { useState, useEffect } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -13,8 +13,8 @@ import {
   Select,
   Button,
 } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
 import DeleteConfirmationModal from "./vehicleModalDelete";
+import { Vehicle, VehicleEditModalProps } from "@/types/types";
 
 export default function VehicleModalUpdates({
   isOpen,
@@ -75,18 +75,18 @@ export default function VehicleModalUpdates({
         <ModalContent
           m={{ base: 2, md: 4 }}
           mb={{ base: 2, md: 4 }}
-          backgroundColor="#fcf8f5"
+          backgroundColor="gray.50"
         >
-          <ModalHeader color="black">Editar Veículo</ModalHeader>
+          <ModalHeader color="#0c0847">Editar Veículo</ModalHeader>
           <ModalCloseButton />
           <ModalBody m={{ base: 1, md: 4 }}>
             {updatedVehicle && (
               <>
                 <FormControl id="type" mb={4}>
-                  <FormLabel color="black">Tipo</FormLabel>
+                  <FormLabel color="#0c0847">Tipo</FormLabel>
                   <Select
                     name="type"
-                    color="black"
+                    color="#0c0847"
                     value={updatedVehicle.type}
                     onChange={handleSelectChange}
                   >
@@ -96,39 +96,39 @@ export default function VehicleModalUpdates({
                   </Select>
                 </FormControl>
                 <FormControl id="placa" mb={4}>
-                  <FormLabel color="black">Placa</FormLabel>
+                  <FormLabel color="#0c0847">Placa</FormLabel>
                   <Input
                     name="placa"
-                    color="black"
+                    color="#0c0847"
                     value={updatedVehicle.placa}
                     onChange={handleInputChange}
                   />
                 </FormControl>
                 <FormControl id="lat" mb={4}>
-                  <FormLabel color="black">Latitude</FormLabel>
+                  <FormLabel color="#0c0847">Latitude</FormLabel>
                   <Input
                     name="lat"
-                    color="black"
+                    color="#0c0847"
                     value={updatedVehicle.lat}
                     type="number"
                     onChange={handleInputChange}
                   />
                 </FormControl>
                 <FormControl id="lng" mb={4}>
-                  <FormLabel color="black">Longitude</FormLabel>
+                  <FormLabel color="#0c0847">Longitude</FormLabel>
                   <Input
                     name="lng"
-                    color="black"
+                    color="#0c0847"
                     value={updatedVehicle.lng}
                     type="number"
                     onChange={handleInputChange}
                   />
                 </FormControl>
                 <FormControl id="speed" mb={4}>
-                  <FormLabel color="black">Velocidade</FormLabel>
+                  <FormLabel color="#0c0847">Velocidade</FormLabel>
                   <Input
                     name="speed"
-                    color="black"
+                    color="#0c0847"
                     value={updatedVehicle.speed}
                     type="number"
                     onChange={handleInputChange}
@@ -136,10 +136,10 @@ export default function VehicleModalUpdates({
                 </FormControl>
 
                 <FormControl id="status" mb={4}>
-                  <FormLabel color="black">Status</FormLabel>
+                  <FormLabel color="#0c0847">Status</FormLabel>
                   <Select
                     name="status"
-                    color="black"
+                    color="#0c0847"
                     value={updatedVehicle.status}
                     onChange={handleSelectChange}
                   >

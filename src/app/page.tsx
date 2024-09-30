@@ -11,7 +11,6 @@ export default function Home() {
         color="white"
         textAlign="center"
         fontSize={{ base: "2xl", md: "4xl" }}
-        bg="gray.800"
       >
         Motora.ai Monitoring
       </Heading>
