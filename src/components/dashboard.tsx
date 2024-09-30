@@ -1,15 +1,54 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, useToast } from "@chakra-ui/react";
+import { useState } from "react";
 import VehicleList from "./vehicleList";
-import VehicleUpdate from "./vehicleUpdate";
+import VehicleRegister from "./vehicleRegister";
 import VehicleMap from "./vehicleMap";
-import { DashboardProps } from "@/types/types";
+import { Vehicle } from "@/types/types";
+import { BASE_URL } from "@/utils/localhost";
 
-export default function Dashboard({
-  vehicles,
-  handleAddVehicle,
-}: DashboardProps) {
+export default function Dashboard() {
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const toast = useToast();
+
+  const handleAddVehicle = async (vehicle: Vehicle) => {
+    try {
+      const response = await fetch(`${BASE_URL}/vehicles`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(vehicle),
+      });
+
+      if (response.ok) {
+        const newVehicle = await response.json();
+        setVehicles((prevVehicles) => [...prevVehicles, newVehicle]);
+        toast({
+          title: "Veículo cadastrado com sucesso!",
+          description: "O veículo foi adicionado e está disponível no mapa.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        });
+      } else {
+        console.error("Erro ao cadastrar veículo:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      toast({
+        title: "Erro ao cadastrar veículo",
+        description: "Ocorreu um erro ao tentar cadastrar o veículo.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+  };
+
   return (
-    <Flex h="100vh" justifyContent="center" alignItems="center" bg="gray.100">
+    <Flex bg="gray.800" justifyContent="center" alignItems="center">
       <Flex
         border="2px solid"
         borderRadius="20px"
@@ -18,6 +57,7 @@ export default function Dashboard({
         p={5}
         bg="white"
         boxShadow="md"
+        backgroundColor="gray.800"
       >
         <Flex direction="column" justifyContent="space-between" flex="1" mr={4}>
           <Box
@@ -31,7 +71,7 @@ export default function Dashboard({
             mb={4}
             h="40vh"
           >
-            <VehicleList />
+            <VehicleList vehicles={vehicles} />
           </Box>
           <Box
             border="2px solid"
@@ -44,7 +84,7 @@ export default function Dashboard({
             mb={4}
             h="40vh"
           >
-            <VehicleUpdate onAddVehicle={handleAddVehicle} />
+            <VehicleRegister onAddVehicle={handleAddVehicle} />
           </Box>
           <Box
             border="2px solid"

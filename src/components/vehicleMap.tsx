@@ -12,12 +12,11 @@ export default function VehicleMap({ vehicles }: VehicleMapProps) {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      bg="gray.50"
     >
       <MapContainer
         center={[51.505, -0.09]}
         zoom={13}
-        style={{ width: "100%", height: "80vh" }}
+        style={{ width: "100%", height: "50vh", borderRadius: "20px" }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {vehicles.map((vehicle) => (

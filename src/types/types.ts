@@ -8,7 +8,7 @@ export interface Vehicle {
   status: string;
 }
 
-export interface VehicleFormProps {
+export interface VehicleRegisterProps {
   onAddVehicle: (vehicle: Vehicle) => void;
 }
 

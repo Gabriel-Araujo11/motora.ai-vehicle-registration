@@ -8,10 +8,12 @@ import {
   VStack,
   useToast,
 } from "@chakra-ui/react";
-import { VehicleFormProps } from "@/types/types";
+import { VehicleRegisterProps } from "@/types/types";
 import { generateRandomCoordinates } from "@/hooks/useRandomCoordinates";
 
-export default function VehicleForm({ onAddVehicle }: VehicleFormProps) {
+export default function VehicleRegister({
+  onAddVehicle,
+}: VehicleRegisterProps) {
   const [type, setType] = useState("car");
   const [placa, setPlaca] = useState("");
   const { lat, lng } = generateRandomCoordinates();
@@ -19,6 +21,18 @@ export default function VehicleForm({ onAddVehicle }: VehicleFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!placa.trim()) {
+      toast({
+        title: "Erro",
+        description: "A placa é obrigatória.",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
+
     const newVehicle = {
       id: Math.random(),
       type,
@@ -28,28 +42,11 @@ export default function VehicleForm({ onAddVehicle }: VehicleFormProps) {
       speed: 0,
       status: "stopped",
     };
-
     try {
-      await onAddVehicle(newVehicle);
-      toast({
-        title: "Veículo cadastrado com sucesso!",
-        description: "O veículo foi adicionado e está disponível no mapa.",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
+      onAddVehicle(newVehicle);
       setPlaca("");
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      toast({
-        title: "Erro ao cadastrar veículo",
-        description: "Ocorreu um erro ao tentar cadastrar o veículo.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
+      console.error(error);
     }
   };
 
@@ -62,7 +59,7 @@ export default function VehicleForm({ onAddVehicle }: VehicleFormProps) {
       borderRadius="md"
     >
       <FormLabel color="#0c0847">Cadastre um veículo:</FormLabel>
-      <VStack>
+      <VStack spacing={4}>
         <Select
           value={type}
           onChange={(e) => setType(e.target.value)}
@@ -86,7 +83,7 @@ export default function VehicleForm({ onAddVehicle }: VehicleFormProps) {
           colorScheme="blue"
           width="full"
           backgroundColor="#0c0847"
-          _hover="black"
+          _hover={{ backgroundColor: "black" }}
         >
           Adicionar Veículo
         </Button>
