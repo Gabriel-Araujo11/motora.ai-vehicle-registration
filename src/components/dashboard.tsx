@@ -1,4 +1,4 @@
-import { Box, Flex, Text, useToast } from "@chakra-ui/react";
+import { Box, Flex, Link, Text, useToast } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import VehicleList from "./vehicleList";
 import VehicleRegister from "./vehicleRegister";
@@ -62,59 +62,73 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <Flex bg="gray.800" justifyContent="center" alignItems="center">
+    <Flex bg="gray.800" justifyContent="center" alignItems="center" p={4}>
       <Flex
-        border="2px solid"
+        direction={{ base: "column", md: "row" }}
         borderRadius="20px"
-        w="70%"
-        h="70%"
+        w={{ base: "100%", md: "70%" }}
         p={5}
         bg="white"
-        boxShadow="md"
         backgroundColor="gray.800"
       >
-        <Flex direction="column" justifyContent="space-between" flex="1" mr={4}>
+        <Flex
+          direction="column"
+          justifyContent="space-between"
+          flex="1"
+          mr={4}
+          w="100%"
+        >
           <Box
+            flex="1"
             border="2px solid"
             borderRadius="20px"
-            flex="1"
             display="flex"
             justifyContent="center"
             alignItems="center"
             bg="gray.50"
             mb={4}
-            h="40vh"
           >
             <VehicleList vehicles={vehicles} setVehicles={setVehicles} />
           </Box>
           <Box
+            flex="1"
             border="2px solid"
             borderRadius="20px"
-            flex="1"
             display="flex"
             justifyContent="center"
             alignItems="center"
             bg="gray.50"
             mb={4}
-            h="40vh"
           >
             <VehicleRegister onAddVehicle={handleAddVehicle} />
           </Box>
           <Box
+            display="flex"
             border="2px solid"
             borderRadius="20px"
-            display="flex"
             justifyContent="center"
             alignItems="center"
             bg="gray.50"
             p={2}
           >
             <Text textAlign="center">
-              by <strong>Motora.Ai</strong>
+              by{" "}
+              <Link href="https://motora.ai/">
+                <strong style={{ color: "#0c0847" }}>Motora.Ai</strong>
+              </Link>
             </Text>
           </Box>
         </Flex>
-        <VehicleMap vehicles={vehicles} />
+
+        <Box
+          flex={{ base: "none", md: "3" }}
+          w={{ base: "100%", md: "100%" }}
+          h={{ base: "300px", md: "500px" }}
+          mt={{ base: 5, md: 0 }}
+          mb={{ base: 5, md: 0 }}
+        >
+          <VehicleMap vehicles={vehicles} />
+        </Box>
       </Flex>
     </Flex>
   );

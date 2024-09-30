@@ -51,13 +51,7 @@ export default function VehicleRegister({
   };
 
   return (
-    <Box
-      as="form"
-      onSubmit={handleSubmit}
-      p={4}
-      borderWidth="1px"
-      borderRadius="md"
-    >
+    <Box as="form" onSubmit={handleSubmit} p={4} borderRadius="md">
       <FormLabel color="#0c0847">Cadastre um veículo:</FormLabel>
       <VStack spacing={4}>
         <Select

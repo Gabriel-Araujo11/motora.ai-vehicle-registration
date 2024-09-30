@@ -128,7 +128,7 @@ export default function VehicleSelect({
   }, [setVehicles]);
 
   return (
-    <Box as="form" p={4} borderWidth="1px" borderRadius="md">
+    <Box as="form" p={4} borderRadius="md">
       <FormControl id="vehicle-select">
         <FormLabel color="#0c0847">Selecione um veículo:</FormLabel>
         <Select
